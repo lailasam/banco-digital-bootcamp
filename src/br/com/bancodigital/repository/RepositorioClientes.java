@@ -36,4 +36,12 @@ public Map<String, Cliente> listarClientes() {
     return this.clientes;
 }
 
+@Override
+public void atualizar(Cliente cliente){
+    if(clientes.containsKey(cliente.getCpf())){
+        clientes.remove(cliente.getCpf());
+        clientes.put(cliente.getCpf(), cliente);
+    }
+}
+
 }
