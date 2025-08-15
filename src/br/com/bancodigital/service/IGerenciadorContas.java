@@ -1,10 +1,7 @@
 package br.com.bancodigital.service;
-import br.com.bancodigital.exceptions.CamposNulosException;
 import br.com.bancodigital.exceptions.CaracteresInvalidosException;
 import br.com.bancodigital.exceptions.ContaNaoExisteException;
 import br.com.bancodigital.exceptions.CpfInvalidoException;
-import br.com.bancodigital.model.Cliente;
-import br.com.bancodigital.model.Conta;
 
 public interface IGerenciadorContas {
     void criarConta(int numero, int agencia, double saldo, String cpfTitular) throws CaracteresInvalidosException, CpfInvalidoException;
