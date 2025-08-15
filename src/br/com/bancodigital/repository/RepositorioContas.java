@@ -3,9 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 //CRUD - CREATE, READ, UPDATE, DELETE
-public class Repositorio <T> {
+public class RepositorioContas <T> {
 private List<T> lista;
-public Repositorio() {
+public RepositorioContas() {
     this.lista = new ArrayList<>();
 }
 public void criar(T objeto) {

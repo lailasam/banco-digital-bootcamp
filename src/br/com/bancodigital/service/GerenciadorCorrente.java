@@ -1,53 +1,53 @@
 package br.com.bancodigital.service;
-
-import br.com.bancodigital.exceptions.CamposNulosException;
 import br.com.bancodigital.exceptions.CaracteresInvalidosException;
-import br.com.bancodigital.exceptions.ClienteNaoExisteException;
+import br.com.bancodigital.exceptions.ContaNaoExisteException;
 import br.com.bancodigital.exceptions.CpfInvalidoException;
-import br.com.bancodigital.model.Cliente;
-import br.com.bancodigital.model.Conta;
 import br.com.bancodigital.model.ContaCorrente;
 import br.com.bancodigital.repository.RepositorioContaCorrente;
 
 public class GerenciadorCorrente implements IGerenciadorContas {
     private RepositorioContaCorrente repositorioContaCorrente;
-    private GerenciadorClientes gerenciadorClientes;
     public GerenciadorCorrente() {
         this.repositorioContaCorrente = new RepositorioContaCorrente();
-        this.gerenciadorClientes = new GerenciadorClientes();
     }
 
     @Override
-    public void criarConta(int numero, int agencia, double saldo, String cpfTitular, int tipoConta) throws CamposNulosException, CaracteresInvalidosException, ClienteNaoExisteException, CpfInvalidoException {
-        if(cpfTitular==null){
-            throw new CpfInvalidoException("CPF do titular da conta invalido.");
+    public void criarConta(int numero, int agencia, double saldo, String cpfTitular) throws CaracteresInvalidosException, CpfInvalidoException {
+        if(cpfTitular==null|| cpfTitular.matches("[0-9]+") || cpfTitular.length()!=11){
+            throw new CpfInvalidoException("CPF deve se composto de 11 numeros.");
         }
-        else if(numero<=0 || agencia<=0 || saldo<0 || (tipoConta!=1 && tipoConta!=2)){
-            throw new CaracteresInvalidosException("Numero e agencia devem ser maiores que 0, o saldo inicial nao pode ser negativo\ne as contas sao do tipo 1 e 2.");
-        }
-        else if(gerenciadorClientes.buscarCliente(cpfTitular) == null){
-                throw new ClienteNaoExisteException("Titular nao encontrado.");
-        }
-        else if(tipoConta == 1){
-            Conta conta = new ContaPoupanca(numero, agencia, saldo, titular);
-            repositorioContaCorrente.adicionar(conta);
+        else if(numero<=0 || agencia<=0 || saldo<0){
+            throw new CaracteresInvalidosException("Numero e agencia devem ser maiores que 0, o saldo inicial nao pode ser negativo.");
         }
         else{
-            Conta conta = new ContaCorrente(numero, agencia, saldo, titular);
-            repositorioContaCorrente.adicionar(conta);
-
+            repositorioContaCorrente.criar(new ContaCorrente(numero, agencia, saldo, cpfTitular));
         }
     }
-    @Override
-    public void excluirConta(int numeroConta) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'excluirConta'");
+
+    public ContaCorrente buscarConta(int numeroConta) throws CaracteresInvalidosException {
+        if(numeroConta <= 0) {
+            throw new CaracteresInvalidosException("Numero da conta deve ser maior que 0.");
+        }
+        return repositorioContaCorrente.listar().stream()
+            .filter(conta -> conta.getNumero() == numeroConta && conta.getTipoConta() == 1) // 1 para Conta Corrente
+            .findFirst()
+            .orElse(null);
     }
+
     @Override
-    public Conta buscarConta(int numeroConta) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarConta'");
+    public void excluirConta(int numeroConta) throws CaracteresInvalidosException, ContaNaoExisteException {
+        ContaCorrente conta = buscarConta(numeroConta);
+        if(numeroConta<=0){
+            throw new CaracteresInvalidosException("Numero da conta deve ser maior que 0.");
+        }
+        else if(conta==null){
+            throw new ContaNaoExisteException ("Conta com numero " + numeroConta + " nao encontrada.");
+        }
+        else{
+            repositorioContaCorrente.remover(conta);
+        }
     }
+
     @Override
     public void listarContas() {
         // TODO Auto-generated method stub
