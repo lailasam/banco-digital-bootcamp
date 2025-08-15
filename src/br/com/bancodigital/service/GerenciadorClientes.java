@@ -1,7 +1,7 @@
 package br.com.bancodigital.service;
-
 import br.com.bancodigital.exceptions.CamposNulosException;
 import br.com.bancodigital.exceptions.ClienteJaExisteException;
+import br.com.bancodigital.exceptions.ClienteNaoExisteException;
 import br.com.bancodigital.exceptions.CpfInvalidoException;
 import br.com.bancodigital.model.Cliente;
 import br.com.bancodigital.repository.IRepositorioCliente;
@@ -13,6 +13,7 @@ private IRepositorioCliente repositorioCliente;
 public GerenciadorClientes(){
     this.repositorioCliente = RepositorioClientes.getInstance();
 }
+
 public void cadastrarCliente(String cpf, String nome, String email, String telefone, String endereco) throws CamposNulosException, ClienteJaExisteException, CpfInvalidoException{
     if(cpf == null || nome == null || email == null || telefone == null || endereco == null) {
         throw new CamposNulosException("Nenhum campo pode ser nulo.");
@@ -20,8 +21,50 @@ public void cadastrarCliente(String cpf, String nome, String email, String telef
     else if (repositorioCliente.listarClientes().containsKey(cpf)) {
         throw new ClienteJaExisteException("Cliente com CPF " + cpf + " ja cadastrado.");
     }
+    else if(cpf.length()!=11 || !cpf.matches("[0-9]+")){
+        throw new CpfInvalidoException("CPF invalido. Deve conter 11 digitos numericos.");
+    }
     else{
        repositorioCliente.adicionar(new Cliente(cpf, nome, email, telefone, endereco)); 
     } 
+}
+
+public void removerCliente(String cpf) throws CpfInvalidoException, ClienteNaoExisteException {
+    if(cpf.length()!=11 || !cpf.matches("[0-9]+")|| cpf == null){
+        throw new CpfInvalidoException("CPF invalido. Deve conter 11 digitos numericos.");
+    }
+    else if(!repositorioCliente.listarClientes().containsKey(cpf)){
+        throw new ClienteNaoExisteException("Cliente com CPF " + cpf + " nao encontrado.");
+    }
+    else{
+        repositorioCliente.remover(cpf);
+    }
+}
+    
+public void atualizarCliente(String cpf, String nome, String email, String telefone, String endereco) throws CamposNulosException, CpfInvalidoException, ClienteNaoExisteException {
+    if(cpf == null || nome == null || email == null || telefone == null || endereco == null) {
+        throw new CamposNulosException("Nenhum campo pode ser nulo.");
+    }
+    else if(cpf.length()!=11 || !cpf.matches("[0-9]+")){
+        throw new CpfInvalidoException("CPF invalido. Deve conter 11 digitos numericos.");
+    }
+    else if(!repositorioCliente.listarClientes().containsKey(cpf)){
+        throw new ClienteNaoExisteException("Cliente com CPF " + cpf + " nao encontrado.");
+    }
+    else{
+        repositorioCliente.atualizar(new Cliente(cpf, nome, email, telefone, endereco));
+    }
+}
+
+public Cliente buscarCliente(String cpf)throws CpfInvalidoException, ClienteNaoExisteException {
+    if(cpf.length()!=11 || !cpf.matches("[0-9]+") || cpf == null){
+        throw new CpfInvalidoException("CPF invalido. Deve conter 11 digitos numericos.");
+    }
+    else if(!repositorioCliente.listarClientes().containsKey(cpf)){
+        throw new ClienteNaoExisteException("Cliente com CPF " + cpf + " nao encontrado.");
+    }
+    else{
+        return repositorioCliente.listarClientes().get(cpf);
+    }
 }
 }
