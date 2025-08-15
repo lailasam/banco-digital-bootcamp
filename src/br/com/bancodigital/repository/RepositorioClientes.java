@@ -5,6 +5,19 @@ import java.util.Map;
 import br.com.bancodigital.model.Cliente;
 
 public class RepositorioClientes implements IRepositorioCliente {
+// INSTANCIA UNICA DO REPOSITORIO
+    private static RepositorioClientes instance;
+    // METODO PARA OBTER A INSTANCIA DO REPOSITORIO
+    public static RepositorioClientes getInstance() {
+        if (instance == null) {
+            synchronized (RepositorioClientes.class) { // Thread-safe
+                if (instance == null) {
+                    instance = new RepositorioClientes();
+                }
+            }
+        }
+        return instance;
+    }
 private Map<String, Cliente> clientes;
 public RepositorioClientes() {
     this.clientes = new HashMap<>();
