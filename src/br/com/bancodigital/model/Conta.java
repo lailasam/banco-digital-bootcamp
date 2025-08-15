@@ -44,4 +44,21 @@ public double getSaldo() {
 public Cliente getTitular() {
     return titular;
 }
+
+public void setNumero(int numero) {
+    this.numero = numero;
+}
+
+public void setAgencia(int agencia) {
+    this.agencia = agencia;
+}
+
+public void setSaldo(double saldo) {
+    this.saldo = saldo;
+}
+
+public void setTitular(Cliente titular) {
+    this.titular = titular;
+}
+
 }
