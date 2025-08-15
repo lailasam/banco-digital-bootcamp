@@ -12,13 +12,13 @@ private static final Random random = new Random();
 private int numero;
 private int agencia;
 private double saldo;
-private Cliente titular;
+private String titular;
 
-public Conta(int numero, int agencia, double saldo, Cliente titular) {
+public Conta(int numero, int agencia, double saldo, String cpfTitular) {
     this.numero = gerarNumeroUnico(100000, 999999, usedNumeros);
     this.agencia = gerarNumeroUnico(1000, 9999, usedAgencias);
     this.saldo = saldo;
-    this.titular = titular;
+    this.titular = cpfTitular;
 }
 
  private static int gerarNumeroUnico(int min, int max, Set<Integer> usedSet) {
@@ -41,7 +41,7 @@ public double getSaldo() {
     return saldo;
 }
 
-public Cliente getTitular() {
+public String getTitular() {
     return titular;
 }
 
@@ -57,7 +57,7 @@ public void setSaldo(double saldo) {
     this.saldo = saldo;
 }
 
-public void setTitular(Cliente titular) {
+public void setTitular(String titular) {
     this.titular = titular;
 }
 

@@ -3,7 +3,7 @@ package br.com.bancodigital.model;
 public class ContaCorrente extends Conta {
     private TipoConta tipoConta;
 
-    public ContaCorrente(int numero, int agencia, double saldo, Cliente titular) {
+    public ContaCorrente(int numero, int agencia, double saldo, String titular) {
         super(numero, agencia, saldo, titular);
         this.tipoConta = TipoConta.CONTA_CORRENTE;
     }
