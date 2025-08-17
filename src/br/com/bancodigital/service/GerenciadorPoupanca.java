@@ -149,7 +149,10 @@ public class GerenciadorPoupanca implements IGerenciadorContas {
             .forEach(System.out::println);
     }
    
-    public void renderJuros(){
+    public void renderJuros() throws RepositorioVazioException{
+        if(repositorioContaPoupanca.listar().isEmpty()){
+            throw new RepositorioVazioException("Nenhuma conta poupanca cadastrada.");
+        }
         repositorioContaPoupanca.listar().forEach(conta -> {
             double rendimento = conta.calcularRendimento();
             if (rendimento > 0) {
