@@ -14,7 +14,7 @@ private int agencia;
 private double saldo;
 private String titular;
 
-public Conta(int numero, int agencia, double saldo, String cpfTitular) {
+public Conta(double saldo, String cpfTitular) {
     this.numero = gerarNumeroUnico(100000, 999999, usedNumeros);
     this.agencia = gerarNumeroUnico(1000, 9999, usedAgencias);
     this.saldo = saldo;

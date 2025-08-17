@@ -6,7 +6,7 @@ public class ContaPoupanca extends Conta{
     private LocalDateTime dataCriacao;
 
     public ContaPoupanca(int numero, int agencia, double saldo, String titular) {
-        super(numero, agencia, saldo, titular);
+        super(saldo, titular);
         this.tipoConta = TipoConta.CONTA_POUPANÇA;
         this.dataCriacao = LocalDateTime.now();
     }
