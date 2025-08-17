@@ -6,7 +6,7 @@ import br.com.bancodigital.exceptions.RepositorioVazioException;
 import br.com.bancodigital.exceptions.SaldoInsuficienteException;
 
 public interface IGerenciadorContas {
-    void criarConta(int numero, int agencia, double saldo, String cpfTitular) throws CaracteresInvalidosException, CpfInvalidoException;
+    void criarConta(double saldo, String cpfTitular) throws CaracteresInvalidosException, CpfInvalidoException;
     void excluirConta(int numeroConta) throws CaracteresInvalidosException, ContaNaoExisteException;
     void depositar(int numeroConta, double valor) throws CaracteresInvalidosException, ContaNaoExisteException;
     void sacar(int numeroConta, double valor) throws CaracteresInvalidosException, SaldoInsuficienteException, ContaNaoExisteException;
