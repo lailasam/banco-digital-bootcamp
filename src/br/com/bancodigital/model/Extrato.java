@@ -6,13 +6,22 @@ public class Extrato {
    private double saldo;
    private LocalDateTime dataTransacao;
    private String operacao;
+   private int numeroConta;
 
-    public Extrato(double saldo, LocalDateTime dataTransacao, String operacao) {
+    public Extrato(double saldo, LocalDateTime dataTransacao, int operacao, int numeroConta) {
+     this.numeroConta = numeroConta;
      this.saldo = saldo;
      this.dataTransacao = dataTransacao;
-     this.operacao = operacao;
+     this.operacao = Operacao.values()[operacao - 1].getDescricao();
     }
+   
+    public int getNumeroConta() {
+    return numeroConta;
+}
 
+   public void setNumeroConta(int numeroConta) {
+    this.numeroConta = numeroConta;
+   }
    public double getSaldo() {
     return saldo;
    }
