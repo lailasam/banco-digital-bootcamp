@@ -3,7 +3,8 @@ package br.com.bancodigital.model;
 public enum Operacao {
     DEPOSITO(1, "Depósito"),
     SAQUE(2, "Saque"),
-    TRANSFERENCIA(3, "Transferência");
+    TRANSFERENCIA(3, "Transferência"),
+    RENDER_JUROS(4, "Rendimento de Juros");
 
     private final int codigo;
     private final String descricao;

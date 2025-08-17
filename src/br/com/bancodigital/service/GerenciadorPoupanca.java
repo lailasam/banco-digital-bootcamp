@@ -149,5 +149,14 @@ public class GerenciadorPoupanca implements IGerenciadorContas {
             .forEach(System.out::println);
     }
    
+    public void renderJuros(){
+        repositorioContaPoupanca.listar().forEach(conta -> {
+            double rendimento = conta.calcularRendimento();
+            if (rendimento > 0) {
+                conta.setSaldo(conta.getSaldo() + rendimento);
+                this.repositorioExtrato.criar(new Extrato(conta.getSaldo(), LocalDateTime.now(), 4, conta.getNumero()));
+            }
+        });
+    }
   
 }
