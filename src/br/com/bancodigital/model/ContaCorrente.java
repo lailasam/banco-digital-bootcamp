@@ -5,7 +5,7 @@ public class ContaCorrente extends Conta {
 
     public ContaCorrente(double saldo, String titular, int tipoConta) {
         super(saldo, titular);
-        this.tipoConta = TipoConta.values()[tipoConta];
+        this.tipoConta = TipoConta.values()[tipoConta-1];
     }
     public int getTipoConta() {
         return tipoConta.getTipo();

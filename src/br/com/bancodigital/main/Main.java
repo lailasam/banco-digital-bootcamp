@@ -23,7 +23,7 @@ public class Main {
     /* Scanner */
     Scanner sc = new Scanner(System.in);
     /* Dados */
-    String cpf; 
+    String cpf = null; 
 
     /***************************************************/
     /* MENU DE OPERACOES CLIENTE*/
@@ -77,18 +77,22 @@ public class Main {
         if(tipoConta == 1) {
             try{gerenciadorCorrente.criarConta(
                 sc.nextDouble(), 
-                cpf);
+                cpf,
+                tipoConta);
+                System.out.println("Conta Corrente criada com sucesso!");
             }catch(CaracteresInvalidosException | CpfInvalidoException e){
                 System.out.println("Erro ao criar conta: " + e.getMessage());
             }
-
+    
     }
     else if(tipoConta == 2){
         try{
             gerenciadorPoupanca.criarConta(
                 sc.nextDouble(), // Saldo
-                cpf // Titular (CPF)
+                cpf, // Titular (CPF)
+                tipoConta
             );
+            System.out.println("Conta Poupanca criada com sucesso!");
         }catch(CaracteresInvalidosException | CpfInvalidoException e){
             System.out.println("Erro ao criar conta: " + e.getMessage());
         }
@@ -97,4 +101,6 @@ public class Main {
         System.out.println("Tipo de conta inválido. Por favor, reinicie o programa.");
     }
   }
+  sc.close();
+}
 }
