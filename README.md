@@ -27,11 +27,12 @@ Os requisitos funcionais definem o que o sistema deve fazer.
 * **RF6:** O sistema deve permitir o **saque** de um valor de uma conta, validando se há saldo suficiente.
     * **RF6.1:** Caso não haja saldo, uma mensagem de erro deve ser exibida.
 * **RF7:** O sistema deve permitir a **transferência** de um valor entre contas, validando o saldo da conta de origem.
-* **RF8:** O sistema deve registrar e exibir o **extrato** de cada conta, listando todas as transações (depósitos, saques, transferências).
+* **RF8:** O sistema deve permitir que o **saldo** da conta poupança aumente conforme uma taxa e tempo determinados.
+* **RF9:** O sistema deve registrar e exibir o **extrato** de cada conta, listando todas as transações (depósitos, saques, transferências).
 
 ### Gerenciamento de Clientes
-* **RF9:** O sistema deve permitir o cadastro de um **Cliente**, contendo atributos como nome e CPF.
-* **RF10:** O sistema deve garantir que o CPF do cliente seja único.
+* **RF10:** O sistema deve permitir o cadastro de um **Cliente**, contendo atributos como nome e CPF.
+* **RF11:** O sistema deve garantir que o CPF do cliente seja único.
 
 ---
 
