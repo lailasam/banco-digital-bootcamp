@@ -3,6 +3,7 @@ package br.com.bancodigital.main;
 import java.util.Scanner;
 
 import br.com.bancodigital.exceptions.CamposNulosException;
+import br.com.bancodigital.exceptions.CaracteresInvalidosException;
 import br.com.bancodigital.exceptions.ClienteJaExisteException;
 import br.com.bancodigital.exceptions.ClienteNaoExisteException;
 import br.com.bancodigital.exceptions.CpfInvalidoException;
@@ -71,7 +72,29 @@ public class Main {
     switch(opcaoConta){
       case 'a':
         System.out.println("Criar Conta:");
+        System.out.println("Digite 1 para Conta Corrente ou 2 para Conta Poupança:");
+        int tipoConta = sc.nextInt();
+        if(tipoConta == 1) {
+            try{gerenciadorCorrente.criarConta(
+                sc.nextDouble(), 
+                cpf);
+            }catch(CaracteresInvalidosException | CpfInvalidoException e){
+                System.out.println("Erro ao criar conta: " + e.getMessage());
+            }
 
+    }
+    else if(tipoConta == 2){
+        try{
+            gerenciadorPoupanca.criarConta(
+                sc.nextDouble(), // Saldo
+                cpf // Titular (CPF)
+            );
+        }catch(CaracteresInvalidosException | CpfInvalidoException e){
+            System.out.println("Erro ao criar conta: " + e.getMessage());
+        }
+    }
+    else{
+        System.out.println("Tipo de conta inválido. Por favor, reinicie o programa.");
     }
   }
 }
