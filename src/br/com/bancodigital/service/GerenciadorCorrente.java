@@ -20,7 +20,7 @@ public class GerenciadorCorrente implements IGerenciadorContas {
     }
 
     @Override
-    public void criarConta(double saldo, String cpfTitular, int tipoConta) throws CaracteresInvalidosException, CpfInvalidoException {
+    public void criarConta(double saldo, String cpfTitular) throws CaracteresInvalidosException, CpfInvalidoException {
         if(cpfTitular==null|| cpfTitular.matches("[0-9]+") || cpfTitular.length()!=11){
             throw new CpfInvalidoException("CPF deve se composto de 11 numeros.");
         }
@@ -28,7 +28,7 @@ public class GerenciadorCorrente implements IGerenciadorContas {
             throw new CaracteresInvalidosException("O saldo inicial nao pode ser negativo.");
         }
         else{
-            repositorioContaCorrente.criar(new ContaCorrente(saldo, cpfTitular, tipoConta));
+            repositorioContaCorrente.criar(new ContaCorrente(saldo, cpfTitular, 1));
         }
     }
 

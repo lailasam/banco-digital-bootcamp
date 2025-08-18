@@ -1,8 +1,12 @@
 package br.com.bancodigital.service;
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.bancodigital.exceptions.CamposNulosException;
 import br.com.bancodigital.exceptions.ClienteJaExisteException;
 import br.com.bancodigital.exceptions.ClienteNaoExisteException;
 import br.com.bancodigital.exceptions.CpfInvalidoException;
+import br.com.bancodigital.exceptions.RepositorioVazioException;
 import br.com.bancodigital.model.Cliente;
 import br.com.bancodigital.repository.IRepositorioCliente;
 import br.com.bancodigital.repository.RepositorioClientes;
@@ -66,5 +70,11 @@ public Cliente buscarCliente(String cpf)throws CpfInvalidoException, ClienteNaoE
     else{
         return repositorioCliente.listarClientes().get(cpf);
     }
+}
+public List<Cliente> listarClientes() throws RepositorioVazioException{
+    if(repositorioCliente.listarClientes().isEmpty()){
+        throw new RepositorioVazioException("Nenhum cliente cadastrado.");
+    }
+    return new ArrayList<>(repositorioCliente.listarClientes().values());
 }
 }

@@ -21,7 +21,7 @@ public class GerenciadorPoupanca implements IGerenciadorContas {
     }
 
     @Override
-    public void criarConta(double saldo, String cpfTitular, int tipoConta)
+    public void criarConta(double saldo, String cpfTitular)
             throws CaracteresInvalidosException, CpfInvalidoException {
                 if(cpfTitular==null|| cpfTitular.matches("[0-9]+") || cpfTitular.length()!=11){
             throw new CpfInvalidoException("CPF deve se composto de 11 numeros.");
@@ -30,7 +30,7 @@ public class GerenciadorPoupanca implements IGerenciadorContas {
             throw new CaracteresInvalidosException("Osaldo inicial nao pode ser negativo.");
         }
         else{
-            repositorioContaPoupanca.criar(new ContaPoupanca(saldo, cpfTitular, tipoConta));
+            repositorioContaPoupanca.criar(new ContaPoupanca(saldo, cpfTitular, 2));
         }
     }
     public ContaPoupanca buscarConta(int numeroConta) throws CaracteresInvalidosException {
