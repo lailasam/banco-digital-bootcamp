@@ -35,5 +35,13 @@ public String getTelefone() {
 public String getEndereco() {
     return endereco;
 }
-
+@Override
+public String toString() {
+    return
+            "cpf='" + cpf + '\'' +
+            ", nome='" + nome + '\'' +
+            ", email='" + email + '\'' +
+            ", telefone='" + telefone + '\'' +
+            ", endereco='" + endereco + '\'' ;
+}
 }

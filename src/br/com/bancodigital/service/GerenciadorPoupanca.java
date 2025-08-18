@@ -7,7 +7,6 @@ import br.com.bancodigital.exceptions.ContaNaoExisteException;
 import br.com.bancodigital.exceptions.CpfInvalidoException;
 import br.com.bancodigital.exceptions.RepositorioVazioException;
 import br.com.bancodigital.exceptions.SaldoInsuficienteException;
-import br.com.bancodigital.model.ContaCorrente;
 import br.com.bancodigital.model.ContaPoupanca;
 import br.com.bancodigital.model.Extrato;
 import br.com.bancodigital.repository.RepositorioContaPoupanca;
