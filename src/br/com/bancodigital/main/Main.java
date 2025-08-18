@@ -27,11 +27,14 @@ public class Main {
        gerenciadorClientes.cadastrarCliente("12345678901", "joao", "joao@", "917488201", "rua ezequiel");
        gerenciadorCorrente.criarConta(1000, "12345678901");
        System.out.println(gerenciadorCorrente.buscarContaPorCpf("12345678901"));
+       gerenciadorCorrente.depositar(gerenciadorCorrente.buscarContaPorCpf("12345678901").getNumero(), 50.00);
+       gerenciadorCorrente.exibirExtrato(gerenciadorCorrente.buscarContaPorCpf("12345678901").getNumero());
 
 } catch (CamposNulosException | ClienteJaExisteException | CpfInvalidoException | RepositorioVazioException
-        | ClienteNaoExisteException | CaracteresInvalidosException e) {
+        | ClienteNaoExisteException | CaracteresInvalidosException | ContaNaoExisteException e) {
     System.out.println(e.getMessage());
+} 
 }
 
 }
-}
+
