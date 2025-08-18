@@ -7,6 +7,7 @@ import br.com.bancodigital.exceptions.ContaNaoExisteException;
 import br.com.bancodigital.exceptions.CpfInvalidoException;
 import br.com.bancodigital.exceptions.RepositorioVazioException;
 import br.com.bancodigital.exceptions.SaldoInsuficienteException;
+import br.com.bancodigital.model.ContaCorrente;
 import br.com.bancodigital.model.ContaPoupanca;
 import br.com.bancodigital.model.Extrato;
 import br.com.bancodigital.repository.RepositorioContaPoupanca;
@@ -39,6 +40,16 @@ public class GerenciadorPoupanca implements IGerenciadorContas {
         }
         return repositorioContaPoupanca.listar().stream()
             .filter(conta -> conta.getNumero() == numeroConta && conta.getTipoConta() == 2) // 2 para Conta Poupanca
+            .findFirst()
+            .orElse(null);
+    }
+
+    public ContaPoupanca buscarContaPorCpf(String cpfTitular) throws CaracteresInvalidosException {
+        if(cpfTitular == null || cpfTitular.length() != 11 || !cpfTitular.matches("[0-9]+")) {
+            throw new CaracteresInvalidosException("CPF deve se composto de 11 numeros.");
+        }
+        return repositorioContaPoupanca.listar().stream()
+            .filter(conta -> conta.getTitular().equals(cpfTitular) && conta.getTipoConta() == 1) // 1 para Conta Corrente
             .findFirst()
             .orElse(null);
     }

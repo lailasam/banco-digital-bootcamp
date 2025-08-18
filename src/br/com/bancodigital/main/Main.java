@@ -31,8 +31,11 @@ try {
 }
 try {
     gerenciadorClientes.listarClientes().forEach(System.out::println);
+    gerenciadorCorrente.listarContas();
+    gerenciadorPoupanca.listarContas();
 } catch (RepositorioVazioException e) {
     System.out.println(e.getMessage());
 }
+gerenciadorCorrente.depositar(0, 0);
 }
 }

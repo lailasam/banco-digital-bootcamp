@@ -42,6 +42,16 @@ public class GerenciadorCorrente implements IGerenciadorContas {
             .orElse(null);
     }
 
+    public ContaCorrente buscarContaPorCpf(String cpfTitular) throws CaracteresInvalidosException {
+        if(cpfTitular == null || cpfTitular.length() != 11 || !cpfTitular.matches("[0-9]+")) {
+            throw new CaracteresInvalidosException("CPF deve se composto de 11 numeros.");
+        }
+        return repositorioContaCorrente.listar().stream()
+            .filter(conta -> conta.getTitular().equals(cpfTitular) && conta.getTipoConta() == 1) // 1 para Conta Corrente
+            .findFirst()
+            .orElse(null);
+    }
+
     @Override
     public void excluirConta(int numeroConta) throws CaracteresInvalidosException, ContaNaoExisteException {
         ContaCorrente conta = buscarConta(numeroConta);
