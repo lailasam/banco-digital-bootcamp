@@ -22,9 +22,9 @@ public class Main {
        gerenciadorClientes.listarClientes().forEach(System.out::println);
        gerenciadorClientes.atualizarCliente("12345678901", "joao silva", "joao@", "917488201", "rua ezequiel");
        gerenciadorClientes.listarClientes().forEach(System.out::println);
-       gerenciadorClientes.removerCliente("12345678901");
+      /*  gerenciadorClientes.removerCliente("12345678901");
        gerenciadorClientes.listarClientes().forEach(System.out::println);
-       gerenciadorClientes.cadastrarCliente("12345678901", "joao", "joao@", "917488201", "rua ezequiel");
+       gerenciadorClientes.cadastrarCliente("12345678901", "joao", "joao@", "917488201", "rua ezequiel");*/
        gerenciadorCorrente.criarConta(1000, "12345678901");
        System.out.println(gerenciadorCorrente.buscarContaPorCpf("12345678901"));
        gerenciadorCorrente.depositar(gerenciadorCorrente.buscarContaPorCpf("12345678901").getNumero(), 50.00);
